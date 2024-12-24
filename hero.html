@@ -1,0 +1,561 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Turkey</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.9.4/dist/leaflet.css"/>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            color: #333;
+        }
+        h2 {
+    text-align: center;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* خط عصري وأنيق */
+    margin: 20px 0;
+    font-weight: bold;
+    font-size: 20px; 
+    color: #4A4A4A; 
+    text-shadow: 
+        1px 1px 0px #f0f0f0, 
+        3px 3px 0px #c0c0c0,
+        5px 5px 10px rgba(0, 0, 0, 0.2); 
+    transform: perspective(800px) rotateX(8deg); 
+    line-height: 1.5; 
+    transition: all 0.3s ease-in-out; 
+}
+h2.t{
+    font-size: 35px; 
+}
+h2:hover {
+    color: #2C3E50; 
+    text-shadow: 
+        2px 2px 0px #d8d8d8, 
+        4px 4px 10px rgba(0, 0, 0, 0.3); 
+    transform: perspective(800px) rotateX(0deg); 
+}
+
+
+.hero-section {
+    position: relative;
+    height: 100vh;
+    background-image: url('static/WhatsApp Image 2024-12-14 at 21.45.19_98dd0e62.jpg');
+    background-size: cover;
+    background-position: center;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    color: white;
+    text-align: center;
+    animation: moveBackground 10s infinite alternate; /* تحريك الخلفية */
+}
+.hero-section::before {
+            content: "";
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background-color: rgba(0, 0, 0, 0.4);
+        }
+@keyframes moveBackground {
+    0% {
+        background-position: center top;
+    }
+    100% {
+        background-position: center bottom;
+    }
+}
+
+        .content {
+            position: relative;
+            z-index: 2;
+            max-width: 700px;
+            padding: 20px;
+        }
+
+        .content h1 {
+            font-size: 3rem;
+            margin-bottom: 10px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .content p {
+            font-size: 1.2rem;
+            margin-bottom: 20px;
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.7);
+        }
+
+        .explore-btn {
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: background-color 0.3s ease;
+            animation: bounce 2s infinite;
+        }
+
+        .explore-btn:hover {
+            background-color: darkred;
+        }
+
+        @keyframes bounce {
+            0%, 100% {
+                transform: translateY(0);
+            }
+            50% {
+                transform: translateY(-5px);
+            }
+        }
+.navbar {
+    position: fixed; /* ثابت أعلى الصفحة */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 260px;
+    z-index: 10;
+    padding: 10px 0;
+    background-color: transparent; /* شفاف */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(44, 62, 80, 0.95); /* خلفية غير شفافة بعد التمرير */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* ظل خفيف */
+}
+
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+           
+            transition: all 0.3s ease;
+        }
+        .nav-link i {
+            font-size: 1.5rem;
+        }
+
+        .nav-link:hover {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+.turkey {
+            display: flex; 
+            justify-content: center; 
+            gap: 20px;
+            flex-wrap: wrap;
+            margin: 30px auto;
+            padding: 20px;
+            max-width: 1800px;
+        }
+
+  footer {
+    background: linear-gradient(to bottom, #2C3E50, #34495E);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+.card {
+            position: relative;
+            width: 250px;
+            height: 350px;
+            overflow: hidden;
+            border-radius: 10px; 
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            transition: transform 0.3s, box-shadow 0.3s; 
+            background-color: #fff;
+        }
+        .card img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover; 
+            display: block;
+            transition: transform 0.3s ease;
+        }
+        .card .caption {
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            color: #fff;
+            text-align: center;
+            padding: 10px;
+            font-size: 1.1rem;
+            opacity: 0;
+            transform: translateY(100%); 
+            transition: opacity 0.5s ease, transform 0.5s ease;
+        }
+        .card:hover .caption {
+            opacity: 1; 
+            transform: translateY(0);
+        }
+        .card:hover img {
+            transform: scale(1.1); 
+        }
+        .card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.4);
+            cursor: pointer;
+        }
+        #map {
+    height: 450px;
+    width: 65%;
+    margin: 20px auto;
+    border-radius: 20px; /* حواف دائرية */
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3); /* ظل */
+    border: 2px solid #2C3E50; /* إطار داكن */
+    animation: glow 2s infinite alternate; /* تأثير متوهج */
+}
+
+@keyframes glow {
+    0% {
+        box-shadow: 0 0 10px rgba(44, 62, 80, 0.6);
+    }
+    100% {
+        box-shadow: 0 0 20px rgba(44, 62, 80, 0.9);
+    }
+}
+        
+        .slider-container {
+            position: relative;
+            width: 100%;
+            height: 50vh;
+            overflow: hidden;
+            margin-bottom: 20px;
+        }
+
+        .slider-image {
+            width: 100%;
+            height: 100%;
+            object-fit: contain;
+            display: none;
+        }
+
+        .slider-image.active {
+            display: block;
+        }
+
+        .click-area {
+            position: absolute;
+            top: 0;
+            width: 50%;
+            height: 100%;
+            cursor: pointer;
+        }
+
+        .click-area.left {
+            left: 0;
+        }
+
+        .click-area.right {
+            right: 0;
+        }
+        footer {
+    background: linear-gradient(to bottom, #2C3E50, #34495E);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.footer-left, .footer-center, .footer-right {
+    width: 30%;
+}
+
+.footer-social a {
+    margin: 0 10px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #096894ac;
+}
+#scrollTopBtn {
+    display: none;
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    z-index: 99;
+    border: none;
+    outline: none;
+    background-color: #167fac;
+    color: white;
+    cursor: pointer;
+    padding: 10px;
+    border-radius: 50%;
+    font-size: 18px;
+    transition: background-color 0.3s ease;
+}
+
+#scrollTopBtn:hover {
+    background-color: rgb(32, 98, 173);
+}
+.window{
+    margin-top: 20px;
+    text-align: center;
+}
+.window h1 {
+    text-align: center; /* يجعل النص في المنتصف */
+    font-size: 2.5rem; /* زيادة حجم الخط قليلاً */
+    margin: 20px 0; /* ضبط المسافة العلوية والسفلية */
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; /* خط عصري وأنيق */
+    font-weight: bold; /* يجعل النص بارزًا */
+    color: #080808; /* لون أنيق للنص */
+    text-shadow: 2px 2px 5px rgba(0, 0, 0, 0.2); /* إضافة ظل للنص */
+    transform: perspective(1000px) rotateX(8deg); /* تأثير ثلاثي الأبعاد */
+    line-height: 1.5; /* تحسين تباعد السطور */
+    transition: all 0.3s ease-in-out; /* تأثير انتقال عند التغيير */
+    padding: 10px; /* إضافة مسافة داخلية */
+    /* background: linear-gradient(45deg, #1d1d1c, #fafafa); خلفية متدرجة */
+ 
+}
+
+
+        .window p {
+            text-align: center;
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .window a {
+            text-align: center;
+
+            display: inline-block;
+            background-color: #167fac;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .window a:hover {
+            background-color: #0d5777;
+        }
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <p style="color:white" class="nav-link"><b>MilkyWayGalaxy</b></p>
+        <a href="/" class="nav-link">
+            <i class="fa-solid fa-house fa-beat" style="color: #fefeff;"></i>    </a>
+    
+        <a href="#" class="nav-link" id="phone-link">
+            <i class="fa-solid fa-phone-volume fa-shake" style="color: #f8f8f8;"></i> 
+        </a>
+        <a href="/profile" class="nav-link" id="profile-link">
+          <i class="fa-regular fa-circle-user fa-fade" style= "color: #ffffff;"></i>
+        </a><!--Profile --> 
+        <a href="/login" class="nav-link" id="logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-flip" style= "color: #ffffff;"></i> 
+        </a><!--Logout --> 
+      </div>
+        <script>
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) { // إذا نزل المستخدم أكثر من 50 بكسل
+            navbar.classList.add('scrolled'); // أضف الكلاس الذي يجعل الـ navbar غير شفاف
+        } else {
+            navbar.classList.remove('scrolled'); // عندما يعود للأعلى يظل شفاف
+        }
+    });
+</script>
+
+      </script>
+
+    <div class="hero-section">
+        <div class="content">
+            <h1>Discover the Heart of Turkey</h1>
+            <p> Where History Meets Breathtaking Beauty<br>
+             Embark on a Journey of Wonders and Wonders</p>
+            <button class="explore-btn">Explore Now</button>
+        </div>
+    </div>
+
+    <div class="window">
+        <h1>Special options </h1>
+        <a href="/create_package"> Choose your own package</a>
+        <a href="/tb">Travel Buddy</a>
+    </div>
+    <h2 class="t">Sizi yatağınızdan Türkiye'ye götüreceğiz</h2>
+
+    <div class="turkey">
+        <a href="/packages" class="card">
+            <img src="{{ url_for('static', filename='WhatsApp Image 2024-12-14 at 17.44.32_d2c318a5.jpg')}}" alt="Istanbul">
+            <div class="caption">Istanbul</div>
+        </a>
+        <a href="/cappodocia" class="card">
+            <img src="{{ url_for('static', filename='WhatsApp Image 2024-12-14 at 19.18.03_be232db6.jpg')}}" alt="Cappadocia">
+            <div class="caption">Cappadocia</div>
+        </a>
+        <a href="antalya.html" class="card">
+            <img src="{{ url_for('static', filename='WhatsApp Image 2024-12-14 at 21.45.19_98dd0e62.jpg') }}" alt="Image">
+
+            <div class="caption">Antalya</div>
+        </a>
+        <a href="izmir.html" class="card">
+            <img src="{{ url_for('static', filename='WhatsApp Image 2024-12-14 at 19.50.10_8b3d46c0.jpg')}}" alt="Izmir">
+            <div class="caption">Izmir</div>
+        </a>
+        <a href="Bursa.html" class="card">
+            <img src="{{ url_for('static', filename='WhatsApp Image 2024-12-14 at 19.56.37_58ce56b8.jpg')}}" alt="Bursa">
+            <div class="caption">Bursa</div>
+        </a>
+    </div>
+
+    <h2>Türkiye'yi keşfedin</h2>
+
+    <div id="map"></div>
+
+    <script src="https://unpkg.com/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        var map = L.map('map').setView([39.92077, 32.85411], 6);
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 18,
+        }).addTo(map);
+        var cities = [
+            {
+                name: "Istanbul",
+                coordinates: [41.0082, 28.9784],
+                image: "static/WhatsApp Image 2024-12-14 at 23.19.31_2d8519b3.jpg"
+            },
+            {
+                name: "Cappadocia",
+                coordinates: [38.641, 34.833],
+                image: "static/WhatsApp Image 2024-12-14 at 23.08.47_e83320eb.jpg"
+            },
+            {
+                name: "Antalya",
+                coordinates: [36.8969, 30.7133],
+                image: "static/WhatsApp Image 2024-12-14 at 23.22.31_0d69db8b.jpg"
+            },
+            {
+                name: "Izmir",
+                coordinates: [38.4237, 27.1428],
+                image: "static/WhatsApp Image 2024-12-14 at 23.22.31_0da25a72.jpg"
+            },
+            {
+                name: "Bursa",
+                coordinates: [40.1828, 29.0667],
+                image: "static/WhatsApp Image 2024-12-14 at 23.22.31_15fc9006.jpg"
+            }
+        ];
+
+        cities.forEach(function(city) {
+            var marker = L.marker(city.coordinates).addTo(map);
+            marker.bindPopup(`
+                <h3>${city.name}</h3>
+                <img src="${city.image}" alt="${city.name}" style="width:100%; height:auto; border-radius:8px;">
+            `);
+        });
+    </script>
+
+    <script>
+        document.getElementById('logout-link').addEventListener('click', function(event) {
+            event.preventDefault();
+            alert('See you soon! Have a great day! 😊');
+        });
+    </script>
+    <script>
+        const backgroundImages = [
+        'static/WhatsApp Image 2024-12-14 at 21.45.19_98dd0e62.jpg',
+            'static/WhatsApp Image 2024-12-14 at 23.19.31_2d8519b3.jpg',
+            'static/WhatsApp Image 2024-12-14 at 23.08.47_e83320eb.jpg',
+            'static/WhatsApp Image 2024-12-14 at 23.22.31_0d69db8b.jpg',
+            'static/WhatsApp Image 2024-12-14 at 23.22.31_0da25a72.jpg'
+        ];
+
+        let currentImageIndex = 0; 
+        const heroSection = document.querySelector('.hero-section');
+        heroSection.addEventListener('click', function () {
+            currentImageIndex = (currentImageIndex + 1) % backgroundImages.length;
+            heroSection.style.backgroundImage = `url('${backgroundImages[currentImageIndex]}')`;
+        });
+    </script>
+    <footer>
+            <div class="footer-container">
+                <div class="footer-left">
+                    <p>&copy; 2024 MilkyWayGalaxy Travel Company</p>
+                </div>
+                <div class="footer-center">
+                    <h4>Contact Us</h4>
+                    <br>
+                    <p><i class="fa-solid fa-envelope "></i> milkywaygalaxycompany@gmail.com
+                    </p>
+                    <br>
+                    <p><i class="fa-solid fa-phone "></i> 01090111683</p>
+                </div>                
+            </div>
+            <div class="footer-social">
+                <a href=""><i class="fa-brands fa-facebook"></i></a>
+                <a href="#"><i class="fa-brands fa-twitter"></i></a>
+                <a href="https://www.instagram.com/milky_way_galaxy_company?igsh=ZjVqYTQ5M3h2cTUx]"><i class="fa-brands fa-instagram"></i></a>
+                <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+            </div>
+            <button id="scrollTopBtn" title="Go to top">
+                <i class="fa-solid fa-arrow-up"></i>
+            </button>
+        </footer>
+        <script>
+                    // Show or hide button on scroll
+const scrollTopBtn = document.getElementById("scrollTopBtn");
+window.onscroll = function () {
+    if (document.body.scrollTop > 20 || document.documentElement.scrollTop > 20) {
+        scrollTopBtn.style.display = "block";
+    } else {
+        scrollTopBtn.style.display = "none";
+    }
+};
+
+// Scroll to top
+scrollTopBtn.addEventListener("click", function () {
+    window.scrollTo({ top: 0, behavior: "smooth" });
+});
+        </script>
+</body>
+</html>

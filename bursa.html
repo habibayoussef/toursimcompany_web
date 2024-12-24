@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Interactive Card with Image</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: Arial, sans-serif;
+        }
+
+        body {
+            background-color: #f4f4f4;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            flex-direction: column;
+            height: 100%;
+            text-align: center;
+            overflow-x: hidden;
+        }
+
+        h1 {
+            font-size: 1.5rem;
+            margin-bottom: 20px;
+            line-height: 1.5;
+        }
+
+        .card-container {
+            display: flex;
+            gap: 20px;
+            overflow-x: hidden;
+            width: 80%;
+            margin: 20px auto;
+            padding-bottom: 20px;
+        }
+
+        .packages {
+            position: relative;
+            min-width: 300px;
+            height: 550px;
+            background-color: #fff;
+            border-radius: 10px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+            cursor: pointer;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+            text-align: center;
+        }
+
+        .packages-content {
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            height: 350px;
+        }
+
+        .packages h3 {
+            font-size: 1.2rem;
+            margin-bottom: 10px;
+            text-align: center;
+        }
+
+        .packages img {
+            width: 100%;
+            height: 100%;
+            object-fit: cover;
+            border-radius: 10px;
+        }
+
+        .packages-details {
+            display: none;
+            padding: 20px;
+            background-color: #f4f4f4;
+            border-radius: 10px;
+            margin-top: 10px;
+            font-size: 1rem;
+            color: #333;
+            overflow: hidden;
+        }
+
+        .packages.open {
+            transform: scale(1.1);
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+        }
+
+        .packages.open .packages-details {
+            display: block;
+        }
+
+        /* Buttons for scroll */
+        #scrollLeftBtn, #scrollRightBtn {
+    position: absolute;
+    top: 50%; /* اجعل الأزرار في منتصف ارتفاع الصور */
+    background-color: #167fac;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+        #scrollLeftBtn {
+            left: 20px;
+        }
+
+        #scrollRightBtn {
+            right: 20px;
+        }
+
+        #scrollLeftBtn:hover, #scrollRightBtn:hover {
+            transform: scale(1.1);
+            background-color:  #167fac; 
+        }
+
+        /* الصورة الخلفية */
+        .container {
+            position: relative;
+            width: 80%;
+            max-width: 1200px;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+            margin-top: 50px;
+            margin-bottom: 50px;
+        }
+
+        .background {
+            width: 100%;
+            height: 400px;
+            background-image: url("{{ url_for('static', filename='WhatsApp Image 2024-12-18 at 02.12.40_a78fbe02.jpg') }}");
+            background-size: cover;
+            background-position: center;
+            animation: moveBackground 10s infinite alternate;
+        }
+
+        @keyframes moveBackground {
+            0% { background-position: center top; }
+            100% { background-position: center bottom; }
+        }
+
+        .window {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background-color: rgba(0, 0, 0, 0.6);
+            padding: 30px 40px;
+            text-align: center;
+            color: white;
+            border-radius: 15px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.5);
+        }
+
+        .window h1 {
+            font-size: 2rem;
+            margin-bottom: 15px;
+        }
+
+        .window p {
+            font-size: 1.1rem;
+            margin-bottom: 20px;
+        }
+
+        .window a {
+            display: inline-block;
+            background-color: red;
+            color: white;
+            padding: 10px 20px;
+            text-decoration: none;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .window a:hover {
+            background-color: darkred;
+        }
+    .button button {
+        background-color: #167fac; /* لون الخلفية */
+        color: white; /* لون النص */
+        border: none;
+        padding:10px;
+        margin:20px;
+        border-radius: 5px;
+        cursor: pointer;
+        font-size: 1rem;
+        transition: transform 0.3s ease, background-color 0.3s ease;
+    }
+
+    .button button:hover {
+        transform: scale(1.1);
+        background-color: #145c8c; /* لون عند التمرير */
+    }
+    body {
+    font-family: 'Arial', sans-serif;
+    background-color: #f2f2f2;
+    margin: 0;
+    padding: 20px;
+}
+
+h1 {
+    color: #3a3a3a;
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+a {
+    text-decoration: none;
+    color: #6a1b9a;
+}
+
+a:hover {
+    color: #d32f2f;
+}
+
+/* تنسيق الكروت */
+.cards-container {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    justify-content: center;
+}
+
+.card {
+    background-color: #ffffff;
+    border: 1px solid #e0e0e0;
+    border-radius: 8px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px;
+    transition: transform 0.3s, box-shadow 0.3s;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+}
+
+.card h2 {
+    font-size: 18px;
+    color: #8e24aa;
+    margin-bottom: 15px;
+    text-align: center;
+}
+
+.card p {
+    margin: 8px 0;
+    font-size: 14px;
+    color: #555;
+}
+
+.card p strong {
+    color: #333;
+}
+
+.card a {
+    display: block;
+    margin: 15px auto 0;
+    width: 100px;
+    text-align: center;
+    background-color: #1976d2;
+}
+#newScrollLeftBtn, #newScrollRightBtn {
+    position: absolute;
+    top: 50%; 
+    background-color: #167fac;
+    color: white;
+    border: none;
+    padding: 15px;
+    font-size: 24px;
+    cursor: pointer;
+    border-radius: 50%;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+}
+
+#newScrollLeftBtn {
+    left: 20px;
+}
+
+#newScrollRightBtn {
+    right: 20px;
+}
+
+#newScrollLeftBtn:hover, #newScrollRightBtn:hover {
+    transform: scale(1.1);
+    background-color: #145c8c;
+}
+
+
+    </style>
+</head>
+<body>
+    <h1>"Welcome to Istanbul, where the magic of the East meets the heritage of the West!"
+        <br>
+        "Enjoy an unforgettable journey in a city that blends tradition with modernity."</h1>
+        <br>
+    <div class="card-container">
+        {% for package in packages %}
+            <div class="packages">
+                <div class="packages-content">
+                    <h3>{{ package.title }}</h3>
+                    <img src="{{ url_for('static', filename=package.image) }}" alt="{{ package.title }}">
+                </div>
+                <div class="packages-details">
+                    <p>{{ package.description}}</p>
+                    <div class="button"> 
+                        <button>submit</button>
+                    </div>
+                </div>
+            
+            </div>
+        {% endfor %}
+    </div>
+    <div class="cards-container">
+        {% for new_package in new_packages %}
+        <div class="card">
+            <h2>{{ new_package[1] }}</h2>
+            <p><strong>Destination:</strong> {{ new_package[2] }}</p>
+            <p><strong>Tickets:</strong> {{ new_package[3] }}</p>
+            <p><strong>Accommodation:</strong> {{ new_package[4] }}</p>
+            <p><strong>Start Date:</strong> {{ new_package[5] }}</p>
+            <p><strong>End Date:</strong> {{ new_package[6] }}</p>
+            <p><strong>Transportation:</strong> {{ new_package[7] }}</p>
+            <p><strong>Activities:</strong> {{ new_package[8] }}</p>
+            <p><strong>Meals:</strong> {{ new_package[9] }}</p>
+            <a href="{{ url_for('book_package', p_id=new_package[0]) }}">Book</a>
+        </div>
+        {% endfor %}
+    </div>
+    
+
+    <br>
+    <br>
+    <br>
+    <div class="container">
+        <div class="background"></div>
+        <div class="window">
+            <h1>Luxury Stays & Turkish Wonders</h1>
+            <p>Explore Turkey’s Finest Hotels—Join Our Exclusive Group Departure!</p>
+            <a href="/index">Explore our hotels</a>
+        </div>
+    </div>
+
+    <button id="scrollLeftBtn" title="Go to left">
+        &#8249; <!-- Left arrow icon -->
+    </button>
+
+    <button id="scrollRightBtn" title="Go to right">
+        &#8250; <!-- Right arrow icon -->
+    </button>
+
+    <script>
+        // Toggle card details
+        const packages = document.querySelectorAll('.packages');
+        packages.forEach(function(package) {
+            package.addEventListener('click', function() {
+                package.classList.toggle('open');
+            });
+        });
+    
+        // Scroll left and right buttons functionality
+        const scrollLeftBtn = document.getElementById("scrollLeftBtn");
+        const scrollRightBtn = document.getElementById("scrollRightBtn");
+        const cardContainer = document.querySelector(".card-container");
+    
+        scrollLeftBtn.addEventListener("click", function() {
+            cardContainer.scrollBy({
+                left: -300, 
+                behavior: "smooth"
+            });
+        });
+    
+        scrollRightBtn.addEventListener("click", function() {
+            cardContainer.scrollBy({
+                left: 300, 
+                behavior: "smooth"
+            });
+        });
+</script>
+
+</body>
+</html>

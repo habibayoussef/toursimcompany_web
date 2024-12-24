@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register</title>
+</head>
+
+<style>
+    /* إعدادات عامة */
+    body {
+        font-family: Arial, sans-serif;
+        margin: 0;
+        padding: 0;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        height: 100vh;
+        background: linear-gradient(135deg,  #b7e3f6, #a9ddf3);
+        color: #2d3436;
+    }
+
+    /* الحاوية */
+    .register-container {
+        background-color: rgba(255, 255, 255, 0.6);
+        backdrop-filter: blur(10px);
+        padding: 30px 40px;
+        border-radius: 10px;
+        box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 400px;
+        text-align: center;
+    }
+
+    h1 {
+        margin-bottom: 20px;
+        font-size: 24px;
+        text-transform: uppercase;
+        color: #167fac;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+    }
+
+    input {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #b2bec3;
+        border-radius: 5px;
+        font-size: 14px;
+        background-color: rgba(255, 255, 255, 0.9);
+        color: #2d3436;
+    }
+
+    input::placeholder {
+        color: #b2bec3;
+    }
+
+    input:focus {
+        outline: none;
+        border: 2px solid #167fac;
+    }
+
+    button {
+        width: 100%;
+        padding: 10px;
+        border: none;
+        border-radius: 5px;
+        background-color: #167fac;
+        color: white;
+        font-size: 16px;
+        cursor: pointer;
+        transition: background-color 0.3s ease;
+    }
+
+    button:hover {
+        background-color: #11658a;
+    }
+</style>
+</head>
+
+<body>
+<div class="register-container">
+    <h1>Register</h1>
+    <form method="POST">
+        <label for="username">Username:</label>
+        <input type="text" id="username" name="username" placeholder="Enter Username" required>
+        <label for="password">Password:</label>
+        <input type="password" id="password" name="password" placeholder="Enter Password" required>
+        <button type="submit">Register</button>
+    </form>
+</div>
+</body>
+</html>

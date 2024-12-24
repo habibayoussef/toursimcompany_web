@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin Panel</title>
+</head>
+<style>
+    /* إعدادات عامة */
+    body {
+        font-family: Arial, sans-serif;
+        background-color: #d8e9f1;
+        margin: 0;
+        padding: 20px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+    }
+
+    h1, h2 {
+        color: #167fac;
+        text-align: center;
+    }
+
+    h1 a {
+        text-decoration: none;
+        color:#63a7c4;
+        font-size: 18px;
+    }
+
+    h1 a:hover {
+        color: #0f5675
+    }
+
+    /* تنسيق النموذج */
+    form {
+        background-color:  #b5d6e4;
+        padding: 70px;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        width: 100%;
+        max-width: 500px;
+    }
+
+    label {
+        display: block;
+        margin-bottom: 8px;
+        font-size: 16px;
+        color: #167fac;
+    }
+
+    input, textarea, button {
+        width: 100%;
+        padding: 10px;
+        margin-bottom: 20px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    textarea {
+        resize: none;
+        height: 100px;
+    }
+
+    button {
+        background-color: #167fac;
+        color: white;
+        border: none;
+        font-size: 16px;
+        cursor: pointer;
+    }
+
+    button:hover {
+        background-color: #0f4f6a;
+    }
+</style>
+<body>
+    <h1>
+        <a href="{{ url_for('turkey') }}">Turkey Home page</a>    </h1>
+    <h1>Admin Panel - Manage packages</h1>
+    <h2>Add New package</h2>
+    <form method="POST">
+        <label>name:</label><input type="text" name="name" required><br>
+        <br>
+        <label>destination:</label><input type="text" name="destination" required><br>
+        <br>
+        <label>Tickets:</label><input type="number" name="tickets" required><br>
+        <br>
+        <label>accommodation:</label><input type="text" name="accommodation" required><br>
+        <br>
+        <label>start_date:</label><input type="datetime-local" name="start_date" required><br>
+        <br>
+        <label>end_date:</label><input type="datetime-local" name="end_date" required><br>
+        <br>
+        <label>transportation:</label><input type="text" name="transportation" required><br>
+        <br>
+        <label>activities:</label><textarea name="activities" required></textarea><br>
+        <br>
+        <label>meals:</label><textarea name="meals" required></textarea><br>
+        <br>
+        <button type="submit">Add Package</button>
+    </form>
+</body>
+</html>

@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Available Hotels</title>
+    <link rel="stylesheet" type="text/css" href="/static/styles.css">
+</head>
+<body>
+    <h1>Available Hotels</h1>
+
+    {% if hotels %}
+        <ul>
+            {% for hotel in hotels %}
+                <li>
+                    <h2>{{ hotel[1] }}</h2>
+                    <p><strong>Price:</strong> ${{ hotel[2] }}</p>
+                    <p><strong>Rating:</strong> {{ hotel[3] }} Stars</p>
+                    <p><strong>Available Rooms:</strong> {{ hotel[4] }}</p>
+                    <a href="/rooms/{{ hotel[0] }}">View Details</a>
+                </li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>No hotels available for the selected filters.</p>
+    {% endif %}
+</body>
+</html>

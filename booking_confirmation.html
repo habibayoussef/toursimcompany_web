@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Booking Confirmation</title>
+</head>
+<body>
+    <h1>Booking Confirmation</h1>
+    <p>Thank you for your booking! Here are the details:</p>
+    <ul>
+        {% for key, value in data.items() %}
+        <li><strong>{{ key.capitalize() }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+
+    <!-- Check if airplane data exists -->
+    {% if airplane_data %}
+    <h2>Airplane Booking Confirmation</h2>
+    <p>Flight Details:</p>
+    <ul>
+        {% for key, value in airplane_data.items() %}
+        <li><strong>{{ key.capitalize() }}:</strong> {{ value }}</li>
+        {% endfor %}
+    </ul>
+    {% else %}
+    <p>No airplane booking details available.</p>
+    {% endif %}
+</body>
+</html>

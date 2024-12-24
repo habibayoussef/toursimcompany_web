@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotel Booking</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Book Your Hotel</h1>
+    </header>
+    <main>
+        {% if hotel %}
+        <div class="booking-details">
+            <h2>{{ hotel.name }}</h2>
+            <p>{{ hotel.description }}</p>
+            <p><strong>Price: {{ hotel.price }}</strong></p>
+            <form action="/confirm-hotel" method="post">
+                <input type="hidden" name="hotel_id" value="{{ hotel.id }}">
+                <label>Name: <input type="text" name="name" required></label>
+                <label>Age: <input type="number" name="age" required></label>
+                <label>Phone: <input type="text" name="phone" required></label>
+                <label>National ID: <input type="text" name="national_id" required></label>
+                <label>Date of Stay: <input type="date" name="stay_date" required></label>
+                <label>Number of Days: <input type="number" name="num_days" required></label>
+                <label>Type of Room:</label>
+                <select name="room_type">
+                    <option value="family">Family</option>
+                    <option value="single">Single</option>
+                    <option value="duplex">Duplex</option>
+                </select>
+                <label>Payment Method:</label>
+                <select name="payment" id="payment-method" onchange="toggleSecretNumberField()">
+                    <option value="visa">Visa</option>
+                    <option value="cash">Cash</option>
+                    <option value="instapay">InstaPay</option>
+                </select>
+
+                <label for="password">Secret Number: 
+                    <input type="password" id="password" name="password">
+                    <span id="toggle-eye" onclick="togglePassword()">&#128065;</span> <!-- Eye icon -->
+                </label>
+
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </div>
+        {% else %}
+        <p>Sorry, the selected hotel is not available.</p>
+        {% endif %}
+    </main>
+
+    <script>
+        // Toggles the required field based on selected payment method
+        function toggleSecretNumberField() {
+            var paymentMethod = document.getElementById("payment-method").value;
+            var secretNumberField = document.getElementById("password");
+
+            // Check if payment method is Visa or InstaPay
+            if (paymentMethod === "visa" || paymentMethod === "instapay") {
+                secretNumberField.setAttribute("required", "true"); // Make the field required
+            } else {
+                secretNumberField.removeAttribute("required"); // Remove the required attribute
+            }
+        }
+
+        // Toggles password visibility
+        function togglePassword() {
+            var passwordField = document.getElementById("password");
+            var eyeIcon = document.getElementById("toggle-eye");
+
+            // Toggle password visibility
+            if (passwordField.type === "password") {
+                passwordField.type = "text"; // Show the password
+                eyeIcon.innerHTML = "&#128065;"; // Open eye icon
+            } else {
+                passwordField.type = "password"; // Hide the password
+                eyeIcon.innerHTML = "&#128065;"; // Closed eye icon
+            }
+        }
+    </script>
+</body>
+</html>

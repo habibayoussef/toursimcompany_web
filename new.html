@@ -1,0 +1,191 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dubai Tours</title>
+   
+    
+</head>
+
+
+    <style>
+        header {
+
+    color: #febe0f; 
+    padding: 1rem 0;
+   
+    
+}
+
+.container {
+    display: flex;
+    justify-content: center; 
+    align-items: center;
+    max-width: 1500px;
+    margin: 0 auto;
+    padding: 0 1rem;
+}
+
+h1 {
+    margin: 0;
+    font-size: 35px; 
+}
+h2{
+    text-align: center;
+}
+h3{
+    color: #005f73;
+}
+
+nav ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
+    display: flex; 
+    gap: 1.5rem; }
+
+nav ul li {
+    margin: 0;
+}
+
+nav ul li a {
+    text-decoration: none; 
+    color:#febe0f; 
+    font-weight: bold;
+   
+}
+li p {
+    color:#febe0f; 
+    font-size: 1rem;
+}
+
+
+
+
+        body {
+           /* background-image: url('https://i.pinimg.com/736x/82/3c/c2/823cc223eabfab691cf77f935a7e2aa3.jpg');*/
+        
+            background-repeat: no-repeat;
+     
+    background-size: cover; 
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f9f9f9;
+        }
+
+        header {
+           
+            color: #005f73;
+            text-align: center;
+            padding: 1rem;
+        }
+
+        h1 {
+            margin: 0;
+            padding: 0.5rem 0;
+        }
+
+        ul {
+            list-style-type: none;
+            padding: 0;
+            margin: 2rem auto;
+            max-width: 800px;
+        }
+
+        li {
+            background-color: #cbe0e7;
+            margin: 1rem 0;
+            padding: 1rem;
+            border-radius: 8px;
+           
+         
+        }
+
+        img {
+            display: block;
+            margin: 0.5rem auto;
+            max-width: 100%;
+            border-radius: 8px;
+        }
+        section{
+            color: #005f73;
+            text-align: center;
+        }
+        button {
+            background-color: #005f73; 
+            color: #febe0f;
+            border: none; 
+            padding: 10px 20px; 
+            text-align: center;
+            display: inline-block;
+            font-size: 16px;
+            margin: 4px 2px; 
+            cursor: pointer; 
+            border-radius: 12px; 
+        }
+    </style>
+<body>
+    <header>
+        <h1>✈Our Tours✈</h1>
+        
+            <div class="container">
+              
+              <nav>
+                <ul>
+                  <li><a href="#contact">Book now</a></li>
+                </ul>
+              </nav>
+            </div>
+        
+    <main>
+        <ul>
+            {% for tour in tours %}
+            <li>
+                <h3>{{ tour.name }}</h3>
+                <p>{{ tour.description }}</p>
+                <p>Price: {{ tour.price }}</p>
+                <img src="{{ tour.image_url }}" alt="{{ tour.name }}" style="width: 150px; height: auto;">
+            </li>
+            {% endfor %}
+        </ul>
+    </main>
+    <section id="contact">
+        <h2>Book</h2>
+        <form id="contact-form">
+          <label for="name">Full Name:</label>
+          <input type="text" id="name" name="name" required>
+  
+          <label for="email">Email:</label>
+          <input type="email" id="email" name="email" required>
+          <label for="phone">Phone Number:</label>
+        <input type="tel" id="phone" name="phone" required placeholder="Enter your phone number" pattern="[0-9+()-\s]*">
+  
+          <label for="message">Tell us the details of the trip you want:</label>
+          <textarea id="message" name="message" rows="5" required></textarea><br>
+          
+  
+          <br><button type="submit">Send</button>
+        </form>
+        <p id="form-message"></p>
+      </section>
+    </main>
+  
+   
+  
+    <script>
+        
+        const form = document.getElementById('contact-form');
+        const message = document.getElementById('form-message');
+        form.addEventListener('submit', function(event) {
+            event.preventDefault(); 
+            message.style.color = 'green'; 
+            message.textContent = 'Your message has been sent successfully,We will conact you🤗'; 
+        });
+    </script>
+    
+    
+    
+</body>
+</html>

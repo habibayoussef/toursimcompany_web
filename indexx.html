@@ -1,0 +1,172 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>UAE Trips</title>
+    <style>
+
+        
+        body {
+           
+           background-image: url('https://i.pinimg.com/736x/13/37/3f/13373fe087c7b269f097e543668bb69b.jpg');
+           background-repeat: no-repeat;
+           background-size: cover; 
+           background-position: center; 
+           background-attachment: fixed; 
+           font-family: Arial, sans-serif;
+           margin: 0;
+            padding: 0;
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #ffffff;
+        }
+
+        header {
+           
+            color: white;
+            text-align: center;
+            padding: 1em;
+        }
+        h2{
+
+            color: #febe0f;
+        }
+        h1 {
+            margin: 0;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .trip-container {
+            background: white;
+            margin: 10px auto;
+            padding: 15px;
+            border: 1px solid #ccc;
+            border-radius: 8px;
+            color: #febe0f;
+           
+            width: 90%;
+            max-width: 600px;
+        }
+        
+        select{
+            color: #febe0f;
+        }
+        
+
+        label {
+            display: block;
+            margin-bottom: 5px;
+            color: #febe0f;
+        }
+
+        select, button {
+            width: 100%;
+            padding: 10px;
+            margin: 10px 0;
+            font-size: 1em;
+            border: 1px solid #005f73;
+            border-radius: 5px;
+        }
+
+        button {
+            background-color: #febe0f;
+            color:#005f73 ;
+            cursor: pointer;
+        }
+        a {
+    text-decoration: none; 
+}
+
+        button:hover {
+            background-color: #febe0fc5;
+        }
+       
+
+        .trip-details {
+            display: none;
+            margin-top: 15px;
+            background-color: #cbe0e7;
+            padding: 10px;
+            border-radius: 5px;
+        }
+       
+a button {
+    width: 120px; 
+    font-size: 20px; 
+    padding: 5px; 
+    border-radius: 5px; 
+    background-color: #febe0f; 
+    color: #005f73; 
+    border: none; 
+    cursor: pointer; 
+    display: block; 
+    margin: 0 auto;
+}
+
+a button:hover {
+    background-color:#febe0fab;
+}
+
+    </style>
+</head>
+<body>
+    <header>
+        <h1> Trips to UAE</h1>
+    </header>
+    <main>
+        
+        <div class="trip-container">
+            <h2>Select Your Trip Date</h2>
+            <label for="tripDate">Available Dates:</label>
+            <select id="tripDate">
+                <option value="">-- Select a Trip Date --</option>
+                <option value="17 Dec 2024 to 24 Dec 2024">17 Dec 2024 to 24 Dec 2024 </option>
+                <option value="25 Dec 2024 to 30 Dec 2024">25 Dec 2024 to 30 Dec 2024</option>
+                <option value="1 Jan 2025 to 7 Jan 2025">1 Jan 2025 to 7 Jan 2025</option>
+                <option value="10 Jan 2025 to 15 Jan 2025">10 Jan 2025 to 15 Jan 2025</option>
+            </select>
+            <button onclick="showDetails()">Show Details</button>
+
+           
+            <div class="trip-details" id="tripDetails">
+                <h3>Trip Details:</h3>
+                <p id="detailsText"></p>
+            </div>
+        </div>
+        <a href="/new">
+            <button>To add activities</button>
+        </a>
+          
+    </main>
+
+    <script>
+        function showDetails() {
+            const tripDate = document.getElementById("tripDate").value;
+            const detailsText = document.getElementById("detailsText");
+            const tripDetails = document.getElementById("tripDetails");
+
+            let details = "";
+
+            const trips = {
+                "17 Dec 2024 to 24 Dec 2024": "Hotel: Atlantis The Palm<br>Meal Plan: Free Breakfast<br>Day 1: Burj Khalifa and Dubai Mall(Not free).<br>Day 2: Jumeirah Beach(free).<br>Day 3: Dubai Marina Tour(free).<br>Day 4: Miracle Garden(free).<br>Day 5: Mall of the Emirates(free).<br>Day 6: Desert Safari(Not free).<br>Day 7: Departure.<br>The price:216$",
+                "25 Dec 2024 to 30 Dec 2024": "Hotel: Atlantis The Palm<br>Meal Plan: Free Breakfast<br>Day 1: Burj Khalifa and Dubai Mall(Not free).<br>Day 2: Jumeirah Beach(free).<br>Day 3: Miracle Garden(free).<br>Day 4: Mall of the Emirates(free).<br>Day 5: Desert Safari(Not free).<br>Day 6: Departure.<br>The price:190$",
+                "1 Jan 2025 to 7 Jan 2025": "Hotel: Atlantis The Palm<br>Meal Plan: Free Breakfast<br>Day 1: Burj Khalifa and Dubai Mall(Not free).<br>Day 2: Jumeirah Beach(free).<br>Day 3: Dubai Marina Tour(free).<br>Day 4: Miracle Garden(free).<br>Day 5: Mall of the Emirates(free).<br>Day 6: Desert Safari(Not free).<br>Day 7: Departure.<br>The price:216$",
+                "10 Jan 2025 to 15 Jan 2025": "Hotel: Atlantis The Palm<br>Meal Plan: Free Breakfast<br>Day 1: Jumeirah Beach(free).<br>Day 2: Dubai Marina Tour(free).<br>Day 3: Miracle Garden(free).<br>Day 4: Mall of the Emirates(free) .<br>Day 5: Departure, Burj Khalifa and Dubai Mall(Not free).<br>The price:150$"
+            };
+
+            if (trips[tripDate]) {
+                tripDetails.style.display = "block";
+                detailsText.innerHTML = trips[tripDate];
+            } else {
+                tripDetails.style.display = "none";
+                alert("Please select a trip date!");
+            }
+        }
+    </script>
+</body>
+</html>

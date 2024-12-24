@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Search result</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='style.css') }}">
+</head>
+<body>
+    <h1> Search result</h1>
+
+    {% if similar_users %}
+        <h3>تم العثور على أشخاص مشابهين:</h3>
+        <ul>
+            {% for user in similar_users %}
+                <li>{{ user[0] }} - phone_number: {{ user[1] }}</li>
+            {% endfor %}
+        </ul>
+    {% else %}
+        <p>{{ message }}</p>
+    {% endif %}
+    
+    <br><br>
+    <a href="/tb">Home</a>
+</body>
+</html>

@@ -1,0 +1,238 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Package</title>
+</head>
+<style>
+/* General styles */
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #d8e9f1;
+}
+
+h1 {
+    text-align: center;
+    margin-top: 30px;
+    color: #167fac;
+    font-size: 2.5rem;
+    font-weight: bold;
+    position: relative;
+    animation: moveText 3s infinite alternate ease-in-out;
+}
+
+/* Keyframes for the animation */
+@keyframes moveText {
+    0% {
+        transform: translateY(0);
+    }
+    100% {
+        transform: translateY(-10px);
+    }
+}
+
+/* Form styles */
+form {
+    max-width: 600px;
+    margin: 30px auto;
+    padding: 20px;
+    background-color: #b5d6e4;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+label {
+    font-size: 16px;
+    font-weight: bold;
+    margin-bottom: 8px;
+    display: inline-block;
+  color: #167fac;
+}
+
+select, input[type="number"], button {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ddd;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+select {
+    height: 40px;
+}
+
+button {
+    background-color: #167fac;
+    color: white;
+    font-size: 16px;
+    cursor: pointer;
+    border: none;
+    border-radius: 4px;
+    padding: 12px;
+    transition: background-color 0.3s, transform 0.2s ease-in-out;
+}
+
+button:hover {
+    background-color: #0e668c;
+    transform: scale(1.05); /* Animation on hover */
+}
+
+/* Total price */
+.total {
+    font-size: 18px;
+    font-weight: bold;
+    color: #167fac;
+    margin-top: 20px;
+}
+
+/* Responsive styles */
+@media screen and (max-width: 600px) {
+    form {
+        padding: 15px;
+        margin: 20px;
+    }
+
+    label {
+        font-size: 14px;
+    }
+
+    button {
+        font-size: 14px;
+    }
+}
+
+
+</style>
+<body>
+    <h1>Create Your Package</h1>
+    <form id="packageForm" action="/create_package" method="POST">
+        <label for="destination">Choose a destination:</label>
+        <br>
+        <select id="destination" name="destination">
+            <option value="Istanbul" data-price="100">Istanbul ($100/day)</option>
+            <br>
+            <option value="Antalya" data-price="80">Antalya ($80/day)</option>
+            <br>
+            <option value="Cappadocia" data-price="90">Cappadocia ($90/day)</option>
+            <br>
+            <option value="Bodrum" data-price="85">Bodrum ($85/day)</option>
+            <br>
+            <option value="Ankara" data-price="70">Ankara ($70/day)</option>
+            <br>
+            <option value="Izmir" data-price="75">Izmir ($75/day)</option>
+            <br>
+        </select>
+        <br><br>
+
+        <label for="accommodation">Choose accommodation type:</label>
+        <br>
+        <select id="accommodation" name="accommodation">
+            <br>
+            <option value="Standard" data-price="50">Standard ($50/day)</option>
+            <br>
+            <option value="Luxury" data-price="150">Luxury ($150/day)</option>
+            <br>
+            <option value="Budget" data-price="30">Budget ($30/day)</option>
+            <br>
+        </select>
+        <br><br>
+
+        <label for="transportation">Choose transportation:</label>
+        <br>
+        <select id="transportation" name="transportation">
+            <br>
+            <option value="Public Transport" data-price="20">Public Transport ($20/day)</option>
+            <option value="Car Rental" data-price="70">Car Rental ($70/day)</option>
+            <option value="Private Driver" data-price="100">Private Driver ($100/day)</option>
+        </select>
+        <br><br>
+
+        <label for="activities">Choose activities:</label>
+        <br>
+        <select id="activities" name="activities" multiple>
+            <option value="Boat Trip" data-price="50">Boat Trip ($50)</option>
+            <br>
+            <option value="Hot Air Balloon" data-price="150">Hot Air Balloon ($150)</option>
+            <br>
+            <option value="City Tour" data-price="30">City Tour ($30)</option>
+            <br>
+            <option value="Museum Visit" data-price="20">Museum Visit ($20)</option>
+            <br>
+            <option value="Shopping Tour" data-price="40">Shopping Tour ($40)</option>
+            <br>
+            <option value="Hiking" data-price="60">Hiking ($60)</option>
+            <br>
+            <option value="Spa Day" data-price="100">Spa Day ($100)</option>
+            <br>
+        </select>
+        <br><br>
+
+        <label for="meals">Choose meal plan:</label>
+        <select id="meals" name="meals">
+            <option value="Standard" data-price="30">Standard ($30/day)</option>
+            <br>
+            <option value="Luxury" data-price="70">Luxury ($70/day)</option>
+            <br>
+            <option value="Self-Catering" data-price="10">Self-Catering ($10/day)</option>
+        </select>
+        <br><br>
+
+        <label for="days">Number of days:</label>
+        <input type="number" id="days" name="days" min="1" max="30" value="1">       
+        <br><br>
+
+        <!-- Hidden input to store the total price -->
+        <input type="hidden" id="totalInput" name="total" value="0">
+        
+        <div class="total" id="totalPrice">Total: $0</div>
+        <br><br>
+        <button type="submit">Create Package</button>
+    </form>
+
+    <script>
+        document.addEventListener("DOMContentLoaded", () => {
+            const destination = document.getElementById("destination");
+            const accommodation = document.getElementById("accommodation");
+            const transportation = document.getElementById("transportation");
+            const activities = document.getElementById("activities");
+            const meals = document.getElementById("meals");
+            const days = document.getElementById("days");
+            const totalPriceElement = document.getElementById("totalPrice");
+            const totalInput = document.getElementById("totalInput");
+
+            function calculateTotal() {
+                let total = 0;
+
+                const destinationPrice = parseInt(destination.selectedOptions[0].dataset.price || 0);
+                const accommodationPrice = parseInt(accommodation.selectedOptions[0].dataset.price || 0);
+                const transportationPrice = parseInt(transportation.selectedOptions[0].dataset.price || 0);
+                const mealsPrice = parseInt(meals.selectedOptions[0].dataset.price || 0);
+                const daysValue = parseInt(days.value || 0);
+
+                total += (destinationPrice + accommodationPrice + transportationPrice + mealsPrice) * daysValue;
+
+                Array.from(activities.selectedOptions).forEach(option => {
+                    total += parseInt(option.dataset.price || 0);
+                });
+
+                totalPriceElement.textContent = `Total: $${total}`;
+                totalInput.value = total; // Update hidden input with the calculated total
+            }
+
+            // Add event listeners
+            destination.addEventListener("change", calculateTotal);
+            accommodation.addEventListener("change", calculateTotal);
+            transportation.addEventListener("change", calculateTotal);
+            activities.addEventListener("change", calculateTotal);
+            meals.addEventListener("change", calculateTotal);
+            days.addEventListener("input", calculateTotal);
+
+            calculateTotal(); // Initial calculation
+        });
+    </script>
+</body>
+</html>

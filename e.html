@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome to Egypt</title>
+    <style>
+        html, body {
+            margin: 0;
+            padding: 0;
+            height: 100%; /* Ensure both html and body take up full height */
+            width: 100%;  /* Ensure full width */
+        }
+
+        body {
+            font-family: Arial, sans-serif;
+            background-image: url('https://i.pinimg.com/474x/dc/4b/bc/dc4bbc8bbc2657a1700816c248c1721b.jpg');
+            background-size: cover; /* Ensures the image covers the entire body */
+            background-position: center; /* Centers the image */
+            background-repeat: no-repeat; /* Prevents repeating the image */
+            background-attachment: fixed; /* Optional: Keep the background fixed when scrolling */
+            color: rgb(248, 248, 248);
+            text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.8);
+        }
+
+        .header {
+            color: rgb(236, 236, 241);
+            text-align: center;
+            padding: 50px 20px;
+        }
+
+        .content {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin: 20px;
+        }
+
+        .video-container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        video {
+            width: 100%;
+            border: 5px solid white;
+            border-radius: 10px;
+        }
+
+        .text-container {
+            flex: 1;
+            padding: 20px;
+        }
+
+        .icons {
+            display: flex;
+            justify-content: center;
+            margin-top: 20px;
+        }
+
+        .icon {
+            margin: 0 15px;
+            text-align: center;
+        }
+
+        .icon img {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            border: 3px solid white;
+            cursor: pointer;
+        }
+
+        .icon a {
+            text-decoration: none;
+            color: white;
+            font-size: 18px;
+            font-weight: bold;
+            display: block;
+            margin-top: 10px;
+        }
+
+        .icon img:hover {
+            transform: scale(1.1);
+            transition: transform 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>Welcome to Egypt</h1>
+        <h2>The Land of Civilization</h2>
+    </div>
+
+    <!-- Content container with flexbox -->
+    <div class="content">
+        <!-- Video container -->
+        <div class="video-container">
+            <h2>Welcome to Egypt - The Land of Civilization</h2>
+            <!-- Embedding a YouTube video -->
+            <iframe width="560" height="315" src="https://www.youtube.com/embed/6MG-eF_Um-c?si=37NRIPW44k3HhYli" title="YouTube video player" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture; web-share" referrerpolicy="strict-origin-when-cross-origin" allowfullscreen></iframe>
+        </div>
+
+        <!-- Text container -->
+        <div class="text-container">
+            <p>Egypt, a land of ancient wonders and timeless beauty, is waiting to be explored. From the majestic pyramids to the tranquil Nile, every corner of Egypt tells a story of grandeur and history.</p>
+            <p>Experience the marvels of Egyptian culture, enjoy luxurious accommodations, and embark on unforgettable adventures.</p>
+        </div>
+    </div>
+
+    <!-- Icons section -->
+    <div class="icons">
+        <div class="icon">
+            <a href="/tours">
+                <img src="https://i.pinimg.com/474x/18/9d/37/189d37f0b8b90f6267175903ded1f2e0.jpg" alt="Tours">
+                Tours
+            </a>
+        </div>
+        <div class="icon">
+            <a href="/airplanes"><!-- Update the link to the correct route -->
+                <img src="https://i.pinimg.com/474x/1c/06/63/1c06634bce4caea405e84ffeb614635f.jpg" alt="Airplanes">
+                Airplanes
+            </a>
+        </div>        
+        <div class="icon">
+            <a href="hotels">
+                <img src="https://i.pinimg.com/474x/c7/f3/ff/c7f3ff66dc37662acfa239263f1dce1a.jpg" alt="Hotels">
+                Hotels
+            </a>
+        </div>
+    </div>
+</body>
+</html>

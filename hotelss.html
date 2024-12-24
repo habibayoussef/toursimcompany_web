@@ -1,0 +1,70 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Hotels</title>
+    <style>
+        .hotel-card {
+            border: 1px solid #ddd;
+            border-radius: 10px;
+            margin: 15px;
+            padding: 15px;
+            text-align: center;
+            width: 200px;
+            display: inline-block;
+            background-color: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        }
+        .book-btn {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 20px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            text-decoration: none;
+            margin-top: 15px;
+        }
+
+        .hotel-card img {
+            width: 100%;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 8px;
+        }
+
+        .hotel-card h3 {
+            margin-top: 10px;
+            font-size: 18px;
+        }
+
+        .hotel-card p {
+            margin: 10px 0;
+        }
+
+        .hotel-card .price {
+            font-size: 16px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hotel Listings</h1>
+    <div class="hotel-cards">
+        
+            {% for hotel in hotels %}
+            <div class="hotel-card">
+                <img src="{{ hotel.image_url }}" alt="{{ hotel.name }}">
+                <h3>{{ hotel.name }}</h3>
+                <p>{{ hotel.description }}</p>
+                <p class="price">{{ hotel.price }}</p>
+                <a href="/book-hotel/{{ hotel.id }}"class="book-btn">Book Now</a>
+            </div>
+            {% endfor %}
+        </div>
+        
+        
+    </div>
+</body>
+</html>

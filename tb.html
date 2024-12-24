@@ -1,0 +1,156 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Travel Buddy</title>
+</head>
+<style>
+    /* Body */
+body {
+    font-family: 'Arial', sans-serif;
+    background-color: #d8e9f1;
+    margin: 0;
+    padding: 0;
+}
+
+/* Header */
+h1 {
+    text-align: center;
+    color: #167fac;
+    margin-top: 30px;
+    font-size: 2.5em;
+}
+
+/* Form Container */
+form {
+    max-width: 600px;
+    margin: 0 auto;
+    background-color: #b5d6e4;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    font-size: 1.1em;
+}
+
+/* Input Fields & Labels */
+label {
+    font-weight: bold;
+    margin-bottom: 10px;
+    display: block;
+    color:#167fac
+}
+
+input[type="text"],
+input[type="date"],
+select {
+    width: 100%;
+    padding: 10px;
+    margin: 8px 0 20px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    font-size: 1em;
+}
+
+/* Button */
+button[type="submit"] {
+    background-color: #167fac;
+    color: white;
+    font-size: 1.2em;
+    padding: 10px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 100%;
+}
+
+button[type="submit"]:hover {
+    background-color: #15546f;
+}
+
+/* Form Section (Spacing Between Form Elements) */
+br {
+    margin-bottom: 15px;
+}
+
+/* Focused Input Styles */
+input:focus, select:focus {
+    border-color: #167fac;
+    outline: none;
+}
+
+/* Responsive Adjustments */
+@media (max-width: 768px) {
+    form {
+        padding: 15px;
+    }
+
+    h1 {
+        font-size: 2em;
+    }
+
+    button[type="submit"] {
+        font-size: 1.1em;
+    }
+}
+
+</style>
+<body>
+    <h1>Choose Your Travel Buddy</h1>
+    <form action="/submit" method="POST">
+        <label for="name">Name:</label>
+        <input type="text" id="name" name="name" required><br><br>
+
+        <label for="country">The city you want to visit:</label>
+        <select id="country" name="country" required>
+            <option value="Istanbul">Istanbul</option>
+            <option value="Cappadocia">Cappadocia</option>
+            <option value="Antalya">Antalya</option>
+            <option value="Izmir">Izmir</option>
+            <option value="Bursa">Bursa</option>
+        </select><br><br>
+
+        <label for="start_date">Start Date:</label>
+        <input type="date" id="start_date" name="start_date" required><br><br>
+
+        <label for="end_date">End Date:</label>
+        <input type="date" id="end_date" name="end_date" required><br><br>
+
+        <label for="answer1">?Do you like natural places</label>
+        <select id="answer1" name="answer1" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="answer2">?Do you prefer to travel with a group or alone</label>
+        <select id="answer2" name="answer2" required>
+            <option value="Group">Group</option>
+            <option value="Single">Single</option>
+        </select><br><br>
+
+        <label for="answer3">?Do you like traveling to historical places</label>
+        <select id="answer3" name="answer3" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="answer4">?Do you want to visit the beaches</label>
+        <select id="answer4" name="answer4" required>
+            <option value="Yes">Yes</option>
+            <option value="No">No</option>
+        </select><br><br>
+
+        <label for="answer5">?Do you prefer to travel in summer or winter</label>
+        <select id="answer5" name="answer5" required>
+            <option value="Summer">Summer</option>
+            <option value="Winter">Winter</option>
+        </select><br><br>
+
+        <label for="phone_number">Phone Number:</label>
+        <input type="text" id="phone_number" name="phone_number" required><br><br>
+
+        <button type="submit">Submit</button>
+    </form>
+</body>
+</html>

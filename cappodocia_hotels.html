@@ -1,0 +1,310 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>خريطة فنادق إسطنبول</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.css" />
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f0f0f0;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+        #map {
+    height: 500px; /* تقليل الارتفاع */
+    width: 80%;    /* تصغير العرض قليلاً */
+    margin: 20px auto;
+    border-radius: 20px;
+    box-shadow: 0 8px 16px rgba(0, 0, 0, 0.3);
+    border: 2px solid #2C3E50;
+}
+
+
+        #hotel-buttons {
+            display: flex;
+            justify-content: center;
+            flex-wrap: wrap;
+            gap: 10px;
+            margin-top: 10px;
+            padding: 10px;
+        }
+
+        /* تغيير لون زرّات الـ maps */
+.hotel-button {
+    padding: 10px 20px;
+    background-color: #167fac;  /* اللون الأساسي للزر */
+    color: white;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 16px;
+    transition: background-color 0.3s;
+}
+
+/* تأثير الـ hover عند المرور فوق الزر */
+.hotel-button:hover {
+    background-color: #155773;  /* تغيير اللون عند التمرير فوق الزر */
+}
+
+
+        .container {
+            display: flex;
+            justify-content: space-between;
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .filter-section {
+         
+    flex: 1;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    max-width: 300px;
+    height: 700px; /* تثبيت الارتفاع */
+    min-width: 300px; /* تثبيت العرض */
+}
+
+        
+        .filter-section select, .filter-section button {
+            width: 100%;
+            padding: 10px;
+            font-size: 1rem;
+            margin: 10px 0;
+        }
+
+        .slider-container {
+            margin-bottom: 20px;
+        }
+
+        .slider {
+            width: 100%;
+        }
+
+        .slider-value {
+            font-size: 1rem;
+            margin-top: 5px;
+        }
+
+        .hotel-container {
+            flex: 3;
+            display: flex;
+            flex-wrap: wrap;
+            gap: 20px;
+            justify-content: flex-start;
+        }
+        .hotel {
+        width: 300px;
+        background-color: white;
+        border-radius: 10px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        cursor: pointer;
+        text-align: center;
+        transition: transform 0.3s ease, box-shadow 0.3s ease;
+        height: 500px;
+        position: relative;
+        overflow: hidden;
+    }
+
+    .hotel img {
+        width: 100%;
+        height: 200px;
+        object-fit: contain;
+        border-radius: 10px 10px 0 0;
+        transition: opacity 0.3s ease;
+    }
+
+    .hotel-details {
+        padding: 10px;
+        height: 250px;
+        overflow-y: auto;
+    }
+
+    .hotel .hover-text {
+        position: absolute;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 200px; /* تحديد نفس ارتفاع الصورة */
+        background-color: #6c98abdb;
+        color: white;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        text-align: center;
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 0.3s ease, visibility 0.3s ease;
+    }
+
+    .hotel:hover .hover-text {
+        opacity: 1;
+        visibility: visible;
+    }
+
+    .hotel:hover img {
+        opacity: 0; /* إخفاء الصورة عند الـ hover */
+    }
+
+    .hotel:hover {
+        transform: scale(1.05);
+        box-shadow: 0 8px 16px rgba(0, 0, 0, 0.2);
+    }
+    
+
+        .book-btn {
+            text-decoration: none;
+            padding: 10px 20px;
+            font-size: 1rem;
+            background-color: #167fac;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            margin-top: 10px;
+            transition: background-color 0.3s ease;
+        }
+
+        .book-btn:hover {
+            background-color: #167fac;
+        }
+        .button{
+            background-color: #167fac;
+            border:none;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <!-- Filter Section -->
+        <aside class="filter-section">
+            <form method="POST">
+                <div class="slider-container">
+                    <label for="price-range">Price Range:</label>
+                    <input type="range" id="price-range" name="price" class="slider" min="0" max="500" step="10" value="50">
+                    <p class="slider-value" id="price-value">Price: $50</p>
+                </div>
+
+                <select name="rating">
+                    <option value="">Rating</option>
+                    <option value="5">5 Stars</option>
+                    <option value="4">4 Stars</option>
+                    <option value="3">3 Stars</option>
+                </select>
+
+                <select name="rooms">
+                    <option value="">Available Rooms</option>
+                    <option value="1">1 Room</option>
+                    <option value="2">2 Rooms</option>
+                    <option value="3">3 Rooms</option>
+                </select>
+
+                <button type="submit" class="button">Apply Filters</button>
+            </form>
+            <form action='/search' method="post">
+                <label>Start Date:</label>
+                <input type="date" name="start_date" required>
+                <br>
+                <br>
+                <label>End Date:</label>
+                <input type="date" name="end_date" required>
+                <br>
+                <br>
+                <button type="submit" class="button">Search</button>
+            </form>
+        </aside>
+
+        <div class="hotel-container">
+            {% for hotel in hotels %}
+            <div class="hotel" data-price="{{ hotel[2] }}" data-rating="{{ hotel[3] }}" data-rooms="{{ hotel[4] }}">
+                <img src="{{ url_for('static', filename=hotel[5]) }}" alt="{{ hotel[1] }}">
+                <h3>{{ hotel[1] }}</h3>
+                <div class="hotel-details">
+                    <p><strong>Price:</strong> ${{ hotel[2] }}</p>
+                    <p><strong>Rating:</strong> {{ hotel[3] }} Stars</p>
+                    <p><strong>Available Rooms:</strong> {{ hotel[4] }}</p>
+                    <p>{{ hotel[6] }}</p>
+                    <a href="{{ url_for('hotel_details', hotel_id=hotel[0]) }}" class="book-btn">View Details</a>
+                </div>
+                <div class="hover-text">
+                    <p>{{ hotel[6] }}</p> <!-- جزء من النص يظهر عند الـ hover -->
+                </div>
+            </div>
+            {% endfor %}
+        </div>
+    </div>
+   
+    
+    <script>
+        // Slider functionality to update the price value
+        const priceSlider = document.getElementById('price-range');
+        const priceValue = document.getElementById('price-value');
+
+        priceSlider.addEventListener('input', function() {
+            priceValue.textContent = 'Price: $' + priceSlider.value;
+        });
+
+        // Toggle hotel details
+        document.querySelectorAll('.hotel').forEach(function(hotel) {
+            hotel.addEventListener('click', function() {
+                hotel.classList.toggle('open');
+            });
+        });
+    </script>
+    <h1>خريطة فنادق إسطنبول</h1>
+    <div id="map"></div>
+    <div id="hotel-buttons"></div>
+
+    <script src="https://cdn.jsdelivr.net/npm/leaflet@1.9.4/dist/leaflet.js"></script>
+    <script>
+        const map = L.map('map').setView([41.0082, 28.9784], 12);
+
+        L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+            maxZoom: 19,
+            attribution: '&copy; <a href="https://www.openstreetmap.org/copyright">OpenStreetMap</a> contributors'
+        }).addTo(map);
+
+        const hotels = [
+            { name: "Takseem Hotel", coords: [41.0369, 28.9856] },
+            { name: "Sultan Ahmed Hotel", coords: [41.0054, 28.9768] },
+            { name: "Sisli Hotel", coords: [41.0606, 28.9871] },
+            { name: "Bosphorus Hotel", coords: [41.0450, 29.0330] }
+        ];
+
+        const hotelButtonsContainer = document.getElementById('hotel-buttons');
+        hotels.forEach(hotel => {
+            const button = document.createElement('button');
+            button.classList.add('hotel-button');
+            button.textContent = hotel.name;
+            hotelButtonsContainer.appendChild(button);
+
+            const marker = L.marker(hotel.coords).addTo(map)
+                .bindPopup('<b>' + hotel.name + '</b>');
+
+            const label = L.tooltip({
+                permanent: true,
+                direction: 'top',
+                className: 'hotel-label'
+            })
+                .setContent(hotel.name)
+                .setLatLng(hotel.coords);
+            map.addLayer(label);
+
+            button.addEventListener('click', () => {
+                map.setView(hotel.coords, 14);
+                marker.openPopup();
+            });
+        });
+
+        setTimeout(() => {
+            map.invalidateSize();
+        }, 100);
+    </script>
+</body>
+</html>

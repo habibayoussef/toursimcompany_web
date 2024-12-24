@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>france Tours</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #292f82;
+            color: white;
+            text-align: center;
+            padding: 20px;
+        }
+
+        nav {
+            margin-top: 20px;
+        }
+
+        nav a {
+            color: white;
+            margin: 0 15px;
+            text-decoration: none;
+            font-size: 18px;
+        }
+
+        nav a:hover {
+            text-decoration: underline;
+        }
+
+        main {
+            padding: 20px;
+        }
+
+        .tour-container {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 20px;
+            padding: 20px;
+        }
+
+        .tour-card {
+            background-color: white;
+            border-radius: 8px;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease-in-out;
+        }
+
+        .tour-card:hover {
+            transform: scale(1.05);
+        }
+
+        .tour-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .tour-card h3 {
+            margin: 15px 0;
+            font-size: 1.5em;
+            text-align: center;
+            color: #2c3e50;
+        }
+
+        .tour-card p {
+            padding: 0 15px;
+            text-align: center;
+            font-size: 1em;
+            color: #7f8c8d;
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Explore france Tours</h1>
+        <nav>
+            <a href="/homee">Home</a>
+            <a href="/aboutt">About Us</a>
+        </nav>
+    </header>
+
+    <main>
+        <section>
+            <h2>Our Tours</h2>
+            <div class="tour-container">
+                {% for tour in tours %}
+                    <div class="tour-card">
+                        <img src="{{ tour.image_url }}" alt="{{ tour.name }}">
+                        <h3>{{ tour.name }}</h3>
+                        <p>{{ tour.description }}</p>
+                        <p><strong>{{ tour.price }}</strong></p>
+                    </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

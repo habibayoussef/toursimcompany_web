@@ -1,0 +1,67 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>France Tours</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Welcome to France Tours</h1>
+        <nav>
+            <a href="/">Home</a>
+            <a href="/about">About Us</a>
+        </nav>
+    </header>
+    <main>
+        <!-- Tours Section -->
+        <section>
+            <h2>Our Tours</h2>
+            <div class="grid">
+                {% for tour in tours %}
+                <div class="card">
+                    <img src="{{ tour.image_url }}" alt="{{ tour.name }}">
+                    <h3>{{ tour.name }}</h3>
+                    <p>{{ tour.description }}</p>
+                    <p><strong>{{ tour.price }}</strong></p>
+                    
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+
+       <!--  Airplanes Section  
+        <section>
+            <h2>Airlines</h2>
+            <div class="grid">
+                {% for airplane in airplanes %}
+                <div class="card">
+                    <img src="{{ airplane.image_url }}" alt="{{ airplane.name }}">
+                    <h3>{{ airplane.name }}</h3>
+                    <p>{{ airplane.description }}</p>
+                    <p><strong>{{ airplane.price }}</strong></p>
+                    <a href="/book-airplane/{{ airplane.id }}" class="button">Book</a>   Airplane booking button  
+                </div>
+                {% endfor %}
+            </div>
+        </section>-->
+
+        <!-- Hotels Section -->
+        <section>
+            <h2>Hotels</h2>
+            <div class="grid">
+                {% for hotel in hotels %}
+                <div class="card">
+                    <img src="{{ hotel.image_url }}" alt="{{ hotel.name }}">
+                    <h3>{{ hotel.name }}</h3>
+                    <p>{{ hotel.description }}</p>
+                    <p><strong>{{ hotel.price }}</strong></p>
+                    <a href="/book-hotel/{{ hotel.id }}" class="button">Book</a> <!-- Button -->
+                </div>
+                {% endfor %}
+            </div>
+        </section>
+    </main>
+</body>
+</html>

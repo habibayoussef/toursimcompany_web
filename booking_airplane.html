@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Airplane Booking</title>
+    <link rel="stylesheet" href="/static/style.css">
+</head>
+<body>
+    <header>
+        <h1>Book Your Airplane</h1>
+    </header>
+    <main>
+        {% if airplane %}
+        <div class="booking-details">
+            <h2>{{ airplane.name }}</h2>
+            <p>{{ airplane.description }}</p>
+            <p><strong>Price: ${{ airplane.price }}</strong></p>
+            <form method="POST" action="{{ url_for('confirm_booking') }}">
+                <input type="hidden" name="airplane_id" value="{{ airplane.id }}">
+                
+                <label>Name: <input type="text" name="name" required></label>
+                <label>Age: <input type="number" name="age" required></label>
+                <label>Phone: <input type="text" name="phone" required></label>
+                <label>National ID: <input type="text" name="national_id" required></label>
+                
+                <label>Date of Travel: <input type="date" name="travel_date" required></label>
+
+                <!-- Class Type -->
+                <label>Class Type:</label>
+                <select name="class_type" required>
+                    <option value="business">Business</option>
+                    <option value="economic">Economic</option>
+                    <option value="standard">Standard</option>
+                </select>
+
+                <!-- Ticket Type -->
+                <label>Ticket Type:</label>
+                <select name="ticket_type" id="ticket-type" onchange="toggleDateFields()" required>
+                    <option value="go">Go</option>
+                    <option value="back">Back</option>
+                    <option value="round">Round (Go, Back)</option>
+                </select>
+
+                <!-- Plane Time -->
+                <label>Plane Time:</label>
+                <select name="plane_time" required>
+                    <option value="10 am">10 AM</option>
+                    <option value="4 pm">4 PM</option>
+                    <option value="10 pm">10 PM</option>
+                </select>
+
+                <!-- Conditional Dates -->
+                <label>Date of Go: <input type="date" name="go_date" id="go-date"></label>
+                <label>Date of Back: <input type="date" name="back_date" id="back-date"></label>
+
+                <!-- Payment Method -->
+                <label>Payment Method:</label>
+                <select name="payment" id="payment-method" onchange="toggleSecretNumberField()" required>
+                    <option value="visa">Visa</option>
+                    <option value="cash">Cash</option>
+                    <option value="instapay">InstaPay</option>
+                </select>
+
+                <!-- Secret Number -->
+                <label for="password">Secret Number: 
+                    <input type="password" id="password" name="password">
+                    <span id="toggle-eye" onclick="togglePassword()">&#128065;</span>
+                </label>
+
+                <button type="submit">Confirm Booking</button>
+            </form>
+        </div>
+        {% else %}
+        <p>Sorry, the selected airplane is not available.</p>
+        {% endif %}
+    </main>
+
+    <script>
+        // Toggles date fields based on ticket type
+        function toggleDateFields() {
+            const ticketType = document.getElementById("ticket-type").value;
+            const goDate = document.getElementById("go-date");
+            const backDate = document.getElementById("back-date");
+
+            goDate.removeAttribute("required");
+            backDate.removeAttribute("required");
+
+            if (ticketType === "go") {
+                goDate.setAttribute("required", "true");
+                backDate.value = ""; // Clear Back Date
+            } else if (ticketType === "back") {
+                backDate.setAttribute("required", "true");
+                goDate.value = ""; // Clear Go Date
+            } else if (ticketType === "round") {
+                goDate.setAttribute("required", "true");
+                backDate.setAttribute("required", "true");
+            }
+        }
+
+        // Toggles secret number field requirement
+        function toggleSecretNumberField() {
+            const paymentMethod = document.getElementById("payment-method").value;
+            const secretNumberField = document.getElementById("password");
+
+            if (paymentMethod === "visa" || paymentMethod === "instapay") {
+                secretNumberField.setAttribute("required", "true");
+            } else {
+                secretNumberField.removeAttribute("required");
+            }
+        }
+
+        // Toggles password visibility
+        function togglePassword() {
+            const passwordField = document.getElementById("password");
+            const eyeIcon = document.getElementById("toggle-eye");
+
+            if (passwordField.type === "password") {
+                passwordField.type = "text";
+                eyeIcon.innerHTML = "&#128065;";  // Eye icon for visibility
+            } else {
+                passwordField.type = "password";
+                eyeIcon.innerHTML = "&#128065;";  // Eye icon for concealment
+            }
+        }
+    </script>
+</body>
+</html>

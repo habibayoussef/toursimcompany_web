@@ -1,0 +1,457 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>شركة السياحة العالمية</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.1/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Arial', sans-serif;
+            color: #333;
+            background-color: #f4f4f9;
+            overflow-x: hidden;
+        }
+
+        /* Header Section */
+        header {
+            background-image: url('static/WhatsApp Image 2024-12-23 at 19.59.19_43b1215d.jpg'); /* تم استخدام صورة سياحية جميلة */
+            background-size: cover;
+            background-position: center;
+            height: 100vh;
+            color: white;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1;
+        }
+
+        header h1 {
+            font-size: 3.5rem;
+            z-index: 2;
+            position: relative;
+            animation: fadeInDown 1.5s ease-in-out;
+        }
+
+        header p {
+            font-size: 1.5rem;
+            margin: 20px 0;
+            z-index: 2;
+            position: relative;
+            animation: fadeInUp 1.5s ease-in-out;
+        }
+
+        /* Animation */
+        @keyframes fadeInDown {
+            from {
+                opacity: 0;
+                transform: translateY(-50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(50px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Services Section */
+        .services {
+            padding: 50px 20px;
+            background-color: #fff;
+            text-align: center;
+        }
+
+        .services h2 {
+            font-size: 2.5rem;
+            color:#167fac;
+            margin-bottom: 20px;
+        }
+
+        .services-container {
+            display: flex;
+            justify-content: center;
+            gap: 20px;
+            flex-wrap: wrap;
+        }
+
+        .service-card {
+            background: #fff;
+            border-radius: 15px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+            width: 300px;
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .service-card:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 8px 20px rgba(0, 0, 0, 0.2);
+        }
+
+        .service-card img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .service-card h3 {
+            font-size: 1.5rem;
+            color: #167fac;
+            margin: 15px 0;
+        }
+
+        .service-card p {
+            font-size: 1rem;
+            color: #666;
+            padding: 0 15px 20px;
+        }
+
+.feedback-container {
+    width: 40%; /* تقليل العرض */
+    max-width: 400px; /* أقصى عرض */
+    margin: 20px 0 0 auto; /* جعل القسم على اليمين */
+    background: white;
+    border: 1px solid #ccc; /* إطار رمادي */
+    border-radius: 8px; /* زوايا دائرية */
+    padding: 15px; /* مسافة داخلية */
+    box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1); /* تأثير الظل */
+    max-height: 200px; /* تقليل الطول */
+    overflow-y: auto; /* تفعيل التمرير إذا زاد المحتوى */
+    
+}
+
+/* نصوص feedback */
+.feedback-container h1,
+.feedback-container h2 {
+    font-size: 1rem; /* حجم النص */
+    margin-bottom: 10px;
+    color:#167fac;}
+
+/* نص textarea */
+.feedback-container textarea {
+    width: 100%;
+    padding: 5px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 5px;
+}
+
+/* تصميم الزر */
+.feedback-container button {
+    background: #167fac;;
+    color: white;
+    padding: 5px 10px;
+    border: none;
+    border-radius: 5px;
+    cursor: pointer;
+    font-size: 0.9rem;
+}
+
+.feedback-container button:hover {
+    background: #06425c;;
+}
+
+/* قائمة التعليقات */
+.feedback-container ul {
+    list-style-type: none;
+    padding: 0;
+    margin: 0;
+}
+
+.feedback-container li {
+    background: #f9f9f9;
+    margin-bottom: 5px;
+    padding: 5px;
+    border-radius: 5px;
+    border: 1px solid #ddd;
+    font-size: 0.9rem;
+}
+.card-container {
+    display: flex;
+    justify-content: space-around;
+    flex-wrap: wrap;
+    gap: 30px; /* زيادة المسافة بين الـ cards */
+    margin-top: 20px;
+}
+
+.card {
+    background-color: #fff;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    padding: 20px;
+    width: 300px; /* زيادة العرض */
+    text-align: center;
+    position: relative;
+    margin-bottom: 40px; /* إضافة مسافة بين الـ cards وقسم الخدمات */
+}
+
+.card img {
+    width: 100%; 
+    height: 200px; /* تأكد من تحديد الارتفاع */
+    object-fit: contain; /* لضبط الصورة داخل الـ card بشكل جيد */
+    border-radius: 8px; /* إذا أردت زوايا دائرية للصورة */
+    padding-bottom: 20px;
+}
+
+/* تصميم النص */
+.card h2 {
+    font-size: 24px;
+    margin-bottom: 15px;
+}
+
+.card a {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #167fac;
+    color: #fff;
+    text-decoration: none;
+    font-size: 18px;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+}
+
+.card a:hover {
+    background-color: #09374a;
+}
+
+/* زيادة المسافة بين الـ cards و الخدمات */
+.services {
+    padding: 50px 20px;
+    background-color: #fff;
+    text-align: center;
+    margin-top: 40px; /* مسافة إضافية */
+}
+h2{
+    color:#167fac;
+}
+.navbar {
+    position: fixed; /* ثابت أعلى الصفحة */
+    top: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 100%;
+    display: flex;
+    justify-content: center;
+    gap: 260px;
+    z-index: 10;
+    padding: 10px 0;
+    background-color: transparent; /* شفاف */
+    transition: background-color 0.3s ease, box-shadow 0.3s ease;
+}
+
+.navbar.scrolled {
+    background-color: rgba(44, 62, 80, 0.95); /* خلفية غير شفافة بعد التمرير */
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3); /* ظل خفيف */
+}
+
+
+        .nav-link {
+            color: #ffffff;
+            text-decoration: none;
+            font-size: 1.5rem;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+           
+            transition: all 0.3s ease;
+        }
+        .nav-link i {
+            font-size: 1.5rem;
+        }
+
+        .nav-link:hover {
+    animation: bounce 0.5s;
+}
+
+@keyframes bounce {
+    0%, 100% {
+        transform: translateY(0);
+    }
+    50% {
+        transform: translateY(-5px);
+    }
+}
+
+
+        footer {
+    background: linear-gradient(to bottom, #2C3E50, #34495E);
+    color: white;
+    padding: 20px;
+    text-align: center;
+    font-size: 14px;
+}
+
+
+.footer-container {
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
+}
+
+.footer-left, .footer-center, .footer-right {
+    width: 30%;
+}
+
+.footer-social a {
+    margin: 0 10px;
+    color: white;
+    font-size: 20px;
+    text-decoration: none;
+}
+
+.footer-social a:hover {
+    color: #096894ac;
+}
+
+    </style>
+</head>
+<body>
+    <div class="navbar">
+        <p style="color:white" class="nav-link"><b>MilkyWayGalaxy</b></p>
+        <a href="#" class="nav-link">
+            <i class="fa-solid fa-house fa-beat" style="color: #fefeff;"></i>    </a>
+    
+        <a href="#" class="nav-link" id="phone-link">
+            <i class="fa-solid fa-phone-volume fa-shake" style="color: #f8f8f8;"></i> 
+        </a>
+        <a href="/login" class="nav-link" id="profile-link">
+          <i class="fa-regular fa-circle-user fa-fade" style= "color: #ffffff;"></i>
+        </a><!--Profile --> 
+        <a href="#" class="nav-link" id="logout-link">
+            <i class="fa-solid fa-arrow-right-from-bracket fa-flip" style= "color: #ffffff;"></i> 
+        </a><!--Logout --> 
+      </div>
+        <script>
+    const navbar = document.querySelector('.navbar');
+
+    window.addEventListener('scroll', () => {
+        if (window.scrollY > 50) { // إذا نزل المستخدم أكثر من 50 بكسل
+            navbar.classList.add('scrolled'); // أضف الكلاس الذي يجعل الـ navbar غير شفاف
+        } else {
+            navbar.classList.remove('scrolled'); // عندما يعود للأعلى يظل شفاف
+        }
+    });
+</script>
+
+      </script>
+<header>
+    <h1>WELCOME TO MILKYWAYGALAXY</h1>
+    <P>"Discover the most beautiful tourist destinations with our exceptional services."</P>
+</header>
+<div class="card-container">
+    <div class="card">
+        <h2>TURKEY</h2>
+        <img src="{{ url_for('static', filename='Turkey.jpeg') }}" alt="turkey">
+        <a href="/turkey" class="btn">Visit Turkey</a>
+    </div>
+  
+    <div class="card">
+        <h2>EGYPT</h2>
+        <img src="{{ url_for('static', filename='egypt.jpeg') }}" alt="turkey">
+        <a href="/e" class="btn">Visit Egypt</a>
+    </div>
+    <div class="card">
+        <h2>DUBAI</h2>
+        <img src="{{ url_for('static', filename='Business Bay - Dubai by night _ Professional photography.jpeg') }}" alt="turkey">
+        <a href="/indexx" class="btn">Visit Dubai</a>
+    </div>
+    <div class="card">
+        <h2>France</h2>
+        <img src="{{ url_for('static', filename='Paris by night.jpeg') }}" alt="turkey">
+        <a href="/m" class="btn">Visit Dubai</a>
+    </div>
+    
+    </div>
+<section class="services">
+    <h2>OUR SERVICES</h2>
+    <div class="services-container">
+        <div class="service-card">
+            <img src="{{ url_for('static', filename='WhatsApp Image 2024-12-23 at 20.43.50_d4fb27a2.jpg') }}" alt="رحلة مميزة">
+            <h3>Our Buses</h3>
+            <p>"Our company's buses offer a comfortable and safe travel experience, 
+                with each bus equipped with the latest amenities to ensure an enjoyable and smooth journey." </p>       
+        </div>
+        <div class="service-card">
+            <img src="{{ url_for('static', filename='Girls Trip Ideas_ 30+ Best Girls Trip Destinations Around The World.jpeg') }}" alt="إقامة فاخرة">
+           <h3>Highlights</h3>
+            <p>"Check out the highlight of our journeys through stunning photos that capture the beauty and excitement of each trip."</p>
+        </div>
+       
+        <div class="service-card">
+            <img src="{{ url_for('static', filename='Mystique hotel - Santorini, Greece_.jpeg') }}" alt="جولات سياحية">
+          <h3>Hotels</h3>
+          <p>"Enjoy unmatched comfort at our hotel, offering an atmosphere of luxury and tranquility."</p>
+        </div>
+        
+    </div>
+</section>
+<div class="feedback-container">
+    <h1>We are happy to see your feedback</h1>
+  <form action="/submit_feedback" method="POST">
+        <textarea name="comment" placeholder=" Write your feedback..." rows="2" required></textarea>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>others feedback</h2>
+    <ul>
+        {% for feedback in feedbacks %}
+        <li>{{ feedback[0] }}</li>
+        {% endfor %}
+    </ul>
+</div>
+<footer>
+    <div class="footer-container">
+        <div class="footer-left">
+            <p>&copy; 2024 MilkyWayGalaxy Travel Company</p>
+        </div>
+        <div class="footer-center">
+            <h4>Contact Us</h4>
+            <br>
+            <p><i class="fa-solid fa-envelope "></i> milkywaygalaxycompany@gmail.com
+            </p>
+            <br>
+            <p><i class="fa-solid fa-phone "></i> 01090111683</p>
+        </div>                
+    </div>
+    <div class="footer-social">
+        <a href=""><i class="fa-brands fa-facebook"></i></a>
+        <a href="#"><i class="fa-brands fa-twitter"></i></a>
+        <a href="https://www.instagram.com/milky_way_galaxy_company?igsh=ZjVqYTQ5M3h2cTUx]"><i class="fa-brands fa-instagram"></i></a>
+        <a href="#"><i class="fa-brands fa-linkedin"></i></a>
+    </div>
+</footer>
+</body>
+</html>

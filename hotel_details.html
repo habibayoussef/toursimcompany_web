@@ -1,0 +1,22 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>{{ hotel[1] }} Details</title>
+</head>
+<body>
+   
+    <h1>{{ hotel[1] }}</h1>
+    <!-- <img src="{{ hotel[5] }}" alt="{{ hotel[1] }} image" style="width:100%; max-width:500px;"> -->
+    <p><strong>Description:</strong> {{ hotel[6] }}</p>
+    <p><strong>Price:</strong> ${{ hotel[2] }}</p>
+    <p><strong>Rating:</strong> {{ hotel[3] }} Stars</p>
+    <p><strong>Available Rooms:</strong> {{ hotel[4] }}</p>
+    <img src="{{ hotel[5] }}" alt="{{ hotel[1] }} image" style="width:100%; max-width:500px;">
+    <img src="{{ hotel[6] }}" alt="{{ hotel[1] }} image" style="width:100%; max-width:500px;">
+    <img src="{{ hotel[7] }}" alt="{{ hotel[1] }} image" style="width:100%; max-width:500px;">
+   
+    <a href="{{ url_for('index') }}">Back to Hotels</a>
+</body>
+</html>
